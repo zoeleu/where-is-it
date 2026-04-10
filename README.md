@@ -1,39 +1,92 @@
-# Next.js template
+# WhereIsIt
 
-This is a Next.js template with shadcn/ui.
+WhereIsIt is a full-stack Next.js app for tracking items and locations so you always know where everything is.
 
-## Database (PostgreSQL)
+## Tech Stack
 
-This project now uses PostgreSQL with Prisma.
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- Better Auth (email/password)
+- Prisma ORM + PostgreSQL
+- Tailwind CSS v4 + shadcn/ui
 
-1. Start a PostgreSQL instance and create a database (for example: `whereisit`).
-2. Set `DATABASE_URL` in `.env`.
-3. Run migrations:
+## Features
+
+- User authentication (sign up, login, session-based auth)
+- Create, view, update, and delete locations
+- Create, view, update, and delete items
+- Item-to-location assignment
+- Dashboard views for recent items and summary stats
+
+## Prerequisites
+
+- Node.js 20+ (or Bun)
+- PostgreSQL database
+
+## Getting Started
+
+1. Install dependencies:
 
 ```bash
-bunx prisma migrate dev
+npm install
 ```
 
-4. Regenerate the Prisma client after schema changes:
+2. Create a .env file in the project root:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/whereisit"
+BETTER_AUTH_SECRET="replace-with-a-long-random-secret"
+BETTER_AUTH_URL="http://localhost:3000"
+```
+
+3. Run Prisma migrations:
 
 ```bash
-bunx prisma generate
+npx prisma migrate dev
 ```
 
-## Adding components
-
-To add components to your app, run the following command:
+4. Start the development server:
 
 ```bash
-npx shadcn@latest add button
+npm run dev
 ```
 
-This will place the ui components in the `components` directory.
+Open http://localhost:3000 in your browser.
 
-## Using components
+## Available Scripts
 
-To use the components in your app, import them as follows:
+- npm run dev: Start development server
+- npm run build: Build for production
+- npm run start: Run production server
+- npm run lint: Run ESLint
+- npm run typecheck: Run TypeScript type checks
+- npm run format: Format TypeScript files with Prettier
 
-```tsx
-import { Button } from "@/components/ui/button";
+## Database Notes
+
+- Prisma schema is located in prisma/schema.prisma
+- Generated Prisma client is output to prisma/generated
+- If you change the schema, run:
+
+```bash
+npx prisma migrate dev
+npx prisma generate
 ```
+
+## Project Structure
+
+- app: Next.js routes, API endpoints, and page layouts
+- components: Reusable UI and feature components
+- hooks: Data-fetching hooks for items and locations
+- lib: Auth and database utilities
+- prisma: Schema, migrations, and generated client
+
+## API Routes
+
+- /api/auth/*: Better Auth handlers
+- /api/items: Item CRUD endpoints
+- /api/locations: Location CRUD endpoints
+
+## License
+
+Private project.
